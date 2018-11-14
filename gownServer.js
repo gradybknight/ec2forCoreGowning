@@ -77,6 +77,9 @@ router.route('/adduser')
                 res.status(500);
                 res.send(err);
             });
+    } else {
+        res.status(500);
+        res.send('go away');
     }
   })
 
