@@ -66,7 +66,8 @@ router.route('/sendtimepointdata')
 
 router.route('/adduser')
   .post((req,res) => {
-    let transmittedMessage = JSON.parse(req.body.transmittedMessage);
+    console.log(req.body);
+    let transmittedMessage = JSON.parse(req.body);
     if (transmittedMessage.spaVersion = spaVersion) {
         rdsOperations.addUser(transmittedMessage.userInformation)
             .then((results)=>{
