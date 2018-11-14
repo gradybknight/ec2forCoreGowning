@@ -67,18 +67,18 @@ router.route('/sendtimepointdata')
 router.route('/adduser')
   .post((req,res) => {
     console.log(req.body);
-    let transmittedMessage = JSON.parse(req.body);
-    if (transmittedMessage.spaVersion = spaVersion) {
-        rdsOperations.addUser(transmittedMessage.userInformation)
-            .then((results)=>{
-                res.status(200);
-                res.send(results);
-            })
-            .catch((err) => {
-                res.status(500);
-                res.send(err);
-            });
-    }
+    // let transmittedMessage = JSON.parse(req.body);
+    // if (transmittedMessage.spaVersion = spaVersion) {
+    //     rdsOperations.addUser(transmittedMessage.userInformation)
+    //         .then((results)=>{
+    //             res.status(200);
+    //             res.send(results);
+    //         })
+    //         .catch((err) => {
+    //             res.status(500);
+    //             res.send(err);
+    //         });
+    // }
   })
 
 router.route('*')
