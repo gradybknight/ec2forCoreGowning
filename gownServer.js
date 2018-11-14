@@ -8,7 +8,7 @@ const rdsOperations = require('./database/rdsOperations');
 // ***********************************************   Express Server Setup   *******************************************
 const PORT = 3000;
 const app = express();
-const secretCode = 'morecowbell';
+const spaVersion = 'morecowbell';
 
 // CORS
 var allowCrossDomain = function(req, res, next) {
@@ -63,6 +63,22 @@ router.route('/sendtimepointdata')
       res.json({message:'why are you sending me bad data from ${req.socket.remoteAddress}?'})
     }
   });
+
+router.route('/adduser')
+  .post((req,res) => {
+    let transmittedMessage = json.parse(req.body.userInformation);
+    if (transmittedMessage.spaVersion = spaVersion) {
+        rdsOperations.addUser(transmittedMessage.userInformation)
+            .then((results)=>{
+                res.status(200);
+                res.send(results);
+            })
+            .catch((err) => {
+                res.status(500);
+                res.send(err);
+            });
+    }
+  })
 
 router.route('*')
   .get((req,res) => {

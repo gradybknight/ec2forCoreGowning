@@ -1,62 +1,44 @@
 const mysql = require('mysql');
 
 // MySQL consts
-const dbhost = 'pinetoprunhistory.cpghyvutjhqg.us-east-1.rds.amazonaws.com';
-const dbuser = 'pinetop';
-const dbpassword = 'bacon911';
-const dbname = 'productionhistory';
+const dbhost = 'gowning-db.cpghyvutjhqg.us-east-1.rds.amazonaws.com';
+const dbuser = 'gradyknight';
+const dbpassword = 'watson78';
+const dbname = 'gowning_db';
 
 module.exports = {
-    writeFractionalTimePoint: function(timePointData){
-        let connection = mysql.createConnection({
-            host:dbhost,
-            user:dbuser,
-            password:dbpassword,
-            database:dbname
-        });
-        connection.query('INSERT INTO fractional SET ?', timePointData, function(err, results, fields) {
-            if (err) {
-                console.log(err);
-                connection.end();
-            } else {
-                console.log(`no errors received`);
-                connection.end();
-            };
+    addUser: function(userInformation){
+        console.log(`called function with ${userInformation}`);
+        return new Promise(function(resolve, reject){
+            let connection = mysql.createConnection({
+                host:dbhost,
+                user:dbuser,
+                password:dbpassword,
+                database:dbname
+            });
+            connection.query('INSERT INTO users SET ?', userInformation, function(err, results, fields) {
+                if (err) {
+                    console.log(err);
+                    connection.end();
+                    reject(err);
+                } else {
+                    console.log(`no errors received`);
+                    connection.end();
+                    resolve(results);
+                };
+            })
         })
     },
-    writePotTimePoint: function(timePointData){
-        let connection = mysql.createConnection({
-            host:dbhost,
-            user:dbuser,
-            password:dbpassword,
-            database:dbname
-        });
-        connection.query('INSERT INTO pot SET ?', timePointData, function(err, results, fields) {
-            if (err) {
-                console.log(err);
-                connection.end();
-            } else {
-                console.log(`no errors received`);
-                connection.end();
-            };
-        })
+    addEntranceTransaction: function(initials, timeStamp){
+
     },
-    getBatchRunHistory(batchID, unitOperation){
-        let connection = mysql.createConnection({
-            host:dbhost,
-            user:dbuser,
-            password:dbpassword,
-            database:dbname
-        });
-        let qryString = `SELECT * from productionhistory.${unitOperation} WHERE batchID = ${batchID}`;
-        connection.query(qryString, function(err, results, fields) {
-            if (err) {
-                console.log(err);
-                connection.end();
-            } else {
-                connection.end();
-                return results;
-            }
-        })
+    addExitTransaction: function(initials, glove, gown, timeStamp){
+
+    },
+    getLoggedInUsers: function(){
+
+    },
+    getTransactionsFromWeeknumber: function(weekNumber, year) {
+
     }
 };
