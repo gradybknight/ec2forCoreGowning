@@ -57,18 +57,18 @@ router.route('/adduser')
     }
   })
 
-// router.route('/usersincore')
-//   .get((req,res) => {
-//     rdsOperations.getLoggedInUsers()
-//         .then((results)=>{
-//             res.status(200);
-//             res.send(results);
-//         })
-//         .catch((err) => {
-//             res.status(500);
-//             res.send(err);
-//         });
-//   })
+router.route('/usersincore')
+  .get((req,res) => {
+    rdsOperations.getLoggedInUsers()
+        .then((results)=>{
+            res.status(200);
+            res.send(results);
+        })
+        .catch((err) => {
+            res.status(500);
+            res.send(err);
+        });
+  })
 
 router.route('*')
   .get((req,res) => {
