@@ -44,7 +44,7 @@ module.exports = {
                 password:dbpassword,
                 database:dbname
             });
-            connection.query('SELECT * FROM gowning_db.transactions where exittimestamp is null;', userInformation, function(err, results, fields) {
+            connection.query('SELECT * FROM gowning_db.transactions where exittimestamp is null;', function(err, results, fields) {
                 if (err) {
                     console.log(err);
                     connection.end();
