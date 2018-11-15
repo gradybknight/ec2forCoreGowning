@@ -36,7 +36,7 @@ module.exports = {
 
     },
     getLoggedInUsers: function(){
-        console.log(`called function with ${userInformation}`);
+        // console.log(`called function with ${userInformation}`);
         return new Promise(function(resolve, reject){
             let connection = mysql.createConnection({
                 host:dbhost,
