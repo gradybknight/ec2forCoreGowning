@@ -38,32 +38,6 @@ app.use(function(req, res, next) {
 });
 
 // ***********************************************   Routes   *******************************************
-router.route('/sendtimepointdata')
-  .post((req,res) => {
-    let timePointMessage = JSON.parse(req.body.timePointMessage);
-    if (timePointMessage.secretCode === secretCode) {
-      let returnMessage = {
-          message:'good data transmission',
-          dataPacket:timePointMessage
-      };
-      if (timePointMessage.unitOperation === 'fractional') {
-        rdsOperations.writeFractionalTimePoint(timePointMessage.timePointData);
-      } else if (timePointMessage.unitOperation === 'pot') {
-        rdsOperations.writePotTimePoint(timePointMessage.timePointData);
-      }
-      
-
-
-      console.log('matched password');
-      console.log(timePointMessage);
-      res.json(returnMessage);
-    } else {
-      console.log('failed password');
-      console.log(timePointMessage);
-      res.json({message:'why are you sending me bad data from ${req.socket.remoteAddress}?'})
-    }
-  });
-
 router.route('/adduser')
   .post((req,res) => {
     let transmittedMessage = (req.body);
@@ -81,6 +55,19 @@ router.route('/adduser')
         res.status(500);
         res.send('go away');
     }
+  })
+
+router.route('/usersincore')
+  .get((req,res) => {
+    rdsOperations.getLoggedInUsers()
+        .then((results)=>{
+            res.status(200);
+            res.send(results);
+        })
+        .catch((err) => {
+            res.status(500);
+            res.send(err);
+        });
   })
 
 router.route('*')
