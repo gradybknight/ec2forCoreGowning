@@ -69,8 +69,8 @@ module.exports = {
             if (timePeriod.upperBoundry = '' ) {
                 timePeriod.upperBoundry = 4098967981
             }
-            let sqlStatement = 'SELECT * FROM gowning_db.transactions where (entrytimestamp > ? and entrytimestamp <= ?)';
-            connection.query(sqlStatement,[timePeriod.lowerBoundry, timePeriod.upperBoundry], function(err, results, fields) {
+            let sqlStatement = `SELECT * FROM gowning_db.transactions where (entrytimestamp > ${timePeriod.lowerBoundry} and entrytimestamp <= ${timePeriod.upperBoundry})`;
+            connection.query(sqlStatement, function(err, results, fields) {
                 if (err) {
                     console.log(err);
                     connection.end();
