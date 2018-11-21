@@ -66,7 +66,7 @@ module.exports = {
                 database:dbname
             });
             console.log(timePeriod);
-            if (timePeriod.upperBoundry = '' ) {
+            if (timePeriod.upperBoundry === '' ) {
                 console.log('put in placeholder')
                 timePeriod.upperBoundry = 4098967981
             }
