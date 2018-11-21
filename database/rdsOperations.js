@@ -57,8 +57,26 @@ module.exports = {
             })
         }) 
     },
-    getTransactionsFromWeeknumber: function(weekNumber, year) {
-
+    getTransactionsInTimePeriod: function(timePeriod) {
+        return new Promise(function(resolve, reject){
+            let connection = mysql.createConnection({
+                host:dbhost,
+                user:dbuser,
+                password:dbpassword,
+                database:dbname
+            });
+            connection.query('SELECT * FROM gowning_db.transactions where (entrytimestamp > ? and entrytimestamp <= ?)',[timePeriod.upperBoundry, timePeriod.lowerBoundry], function(err, results, fields) {
+                if (err) {
+                    console.log(err);
+                    connection.end();
+                    reject(err);
+                } else {
+                    console.log(`no errors received`);
+                    connection.end();
+                    resolve(results);
+                };
+            })
+        }) 
     },
     getAllKnownUsers: function() {
         return new Promise(function(resolve, reject){
