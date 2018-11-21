@@ -65,6 +65,7 @@ module.exports = {
                 password:dbpassword,
                 database:dbname
             });
+            console.log(timePeriod);
             connection.query('SELECT * FROM gowning_db.transactions where (entrytimestamp > ? and entrytimestamp <= ?)',[timePeriod.upperBoundry, timePeriod.lowerBoundry], function(err, results, fields) {
                 if (err) {
                     console.log(err);
