@@ -60,7 +60,7 @@ router.route('/adduser')
 router.route('/transactionsintimeperiod')
   .post((req,res) => {
     let transmittedMessage = req.body;
-    console.log(transmittedMessage.timePeriod);
+    console.log(req.body);
     rdsOperations.getTransactionsInTimePeriod(transmittedMessage.timePeriod)
       .then((results) => {
         res.status(200);
