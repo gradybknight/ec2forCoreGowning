@@ -65,20 +65,17 @@ module.exports = {
                 password:dbpassword,
                 database:dbname
             });
-            console.log(timePeriod);
             if (timePeriod.upperBoundry === '' ) {
                 console.log('put in placeholder')
                 timePeriod.upperBoundry = 4098967981
             }
             let sqlStatement = `SELECT * FROM gowning_db.transactions where (entrytimestamp > ${timePeriod.lowerBoundry}) and (entrytimestamp <= ${timePeriod.upperBoundry})`;
-            console.log(sqlStatement);
             connection.query(sqlStatement, function(err, results, fields) {
                 if (err) {
                     console.log(err);
                     connection.end();
                     reject(err);
                 } else {
-                    console.log(`no errors received`);
                     connection.end();
                     resolve(results);
                 };
