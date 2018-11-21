@@ -61,7 +61,7 @@ router.route('/transactionsintimeperiod')
   .post((req,res) => {
     let transmittedMessage = req.body;
     console.log(req.body);
-    rdsOperations.getTransactionsInTimePeriod(transmittedMessage.timePeriod)
+    rdsOperations.getTransactionsInTimePeriod(transmittedMessage)
       .then((results) => {
         res.status(200);
         res.send(results);
