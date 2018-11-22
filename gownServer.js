@@ -102,14 +102,30 @@ router.route('/newentry')
   .post((req,res)=>{
     let entryTransaction = req.body;
     console.log(entryTransaction);
-    // need to add database operation
+    rdsOperations.newentry(entryTransaction)
+      .then(results => {
+        res.status(200);
+        res.send(results);
+      })
+      .catch(error => {
+        res.status(500);
+        res.send(error);
+      });
   })
 
 router.route('/systemclearedtransaction')
   .post((req,res) => {
     let existingTransactionID = req.body;
     console.log(existingTransactionID);
-    // need to add database operation
+    rdsOperations.systemClearedTransaction(existingTransactionID)
+      .then(results => {
+        res.status(200);
+        res.send(results);
+      })
+      .catch(error => {
+        res.status(500);
+        res.send(error);
+      });
   })
 
 router.route('*')
