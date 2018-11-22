@@ -101,7 +101,7 @@ router.route('/getallknownusers')
 router.route('/newentry')
   .post((req,res)=>{
     console.log(req.body);
-    let entryTransaction = req.body.newEntryTransaction;
+    let entryTransaction = req.body;
     console.log(entryTransaction);
     rdsOperations.newentry(entryTransaction)
       .then(results => {
