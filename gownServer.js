@@ -98,6 +98,20 @@ router.route('/getallknownusers')
       });
   });
 
+router.route('/newentry')
+  .post((req,res)=>{
+    let entryTransaction = req.body;
+    console.log(entryTransaction);
+    // need to add database operation
+  })
+
+router.route('/systemclearedtransaction')
+  .post((req,res) => {
+    let existingTransactionID = req.body;
+    console.log(existingTransactionID);
+    // need to add database operation
+  })
+
 router.route('*')
   .get((req,res) => {
     var userIP = req.socket.remoteAddress;

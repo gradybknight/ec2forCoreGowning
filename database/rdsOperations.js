@@ -82,6 +82,52 @@ module.exports = {
             })
         }) 
     },
+    systemClearedTransaction: function(existingTransactionID) {
+        return new Promise(function(resolve, reject){
+            let connection = mysql.createConnection({
+                host:dbhost,
+                user:dbuser,
+                password:dbpassword,
+                database:dbname
+            });
+            console.log(`system cleared transaction:`);
+            console.log(existingTransactionID);
+            let sqlStatement = `UPDATE gowning_db.transactions SET exittimestamp = ${Date.now()}, gown=0, glove=0 WHERE id = ${existingTransactionID};`;
+            connection.query(sqlStatement, function(err, results, fields) {
+                if (err) {
+                    console.log(err);
+                    connection.end();
+                    reject(err);
+                } else {
+                    connection.end();
+                    resolve(results);
+                };
+            })
+        }) 
+    },
+    newentry: function(entryTransaction) {
+        return new Promise(function(resolve, reject){
+            let connection = mysql.createConnection({
+                host:dbhost,
+                user:dbuser,
+                password:dbpassword,
+                database:dbname
+            });
+            console.log(`new entry:`);
+            console.log(entryTransaction);
+            let sqlStatement = `insert into gowning_db.transactions (initials, team, entrytimestamp) values (${entryTransaction.initials}, ${entryTransaction.team}, ${entryTransaction.entrytimestamp});`;
+            connection.query(sqlStatement, function(err, results, fields) {
+                if (err) {
+                    console.log(err);
+                    connection.end();
+                    reject(err);
+                } else {
+                    connection.end();
+                    resolve(results);
+                };
+            })
+        }) 
+    },
     getAllKnownUsers: function() {
         return new Promise(function(resolve, reject){
             let connection = mysql.createConnection({
