@@ -115,7 +115,7 @@ module.exports = {
             });
             console.log(`new entry:`);
             console.log(entryTransaction);
-            let sqlStatement = `insert into gowning_db.transactions (initials, team, entrytimestamp) values (${entryTransaction.initials}, ${entryTransaction.team}, ${entryTransaction.entrytimestamp});`;
+            let sqlStatement = `insert into gowning_db.transactions (initials, team, entrytimestamp) values ('${entryTransaction.initials}', '${entryTransaction.team}', ${entryTransaction.entrytimestamp});`;
             connection.query(sqlStatement, function(err, results, fields) {
                 if (err) {
                     console.log(err);
