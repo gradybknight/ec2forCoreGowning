@@ -101,7 +101,7 @@ router.route('/getallknownusers')
 router.route('/newentry')
   .post((req,res)=>{
     console.log(req.body);
-    let entryTransaction = req.body;
+    let entryTransaction = req.body.newEntryTransaction;
     console.log(entryTransaction);
     rdsOperations.newentry(entryTransaction)
       .then(results => {
@@ -116,9 +116,7 @@ router.route('/newentry')
 
 router.route('/systemclearedtransaction')
   .post((req,res) => {
-    console.log(req.body);
     let existingTransactionID = req.body.id;
-    console.log(existingTransactionID);
     rdsOperations.systemClearedTransaction(existingTransactionID)
       .then(results => {
         res.status(200);
