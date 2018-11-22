@@ -117,7 +117,7 @@ router.route('/newentry')
 router.route('/systemclearedtransaction')
   .post((req,res) => {
     console.log(req.body);
-    let existingTransactionID = req.body.existingTransactionID;
+    let existingTransactionID = req.body.id;
     console.log(existingTransactionID);
     rdsOperations.systemClearedTransaction(existingTransactionID)
       .then(results => {
