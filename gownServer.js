@@ -114,6 +114,22 @@ router.route('/newentry')
       });
   })
 
+router.route('/newexit')
+  .post((req,res)=>{
+    console.log(req.body);
+    let exitTransaction = req.body;
+    console.log(exitTransaction);
+    rdsOperations.newexit(exitTransaction)
+      .then(results => {
+        res.status(200);
+        res.send(results);
+      })
+      .catch(error => {
+        res.status(500);
+        res.send(error);
+      });
+  })
+
 router.route('/systemclearedtransaction')
   .post((req,res) => {
     let existingTransactionID = req.body.id;

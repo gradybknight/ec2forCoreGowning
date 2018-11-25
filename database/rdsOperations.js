@@ -128,6 +128,31 @@ module.exports = {
             })
         }) 
     },
+    newexit: function(exitTransaction) {
+        return new Promise(function(resolve, reject){
+            let connection = mysql.createConnection({
+                host:dbhost,
+                user:dbuser,
+                password:dbpassword,
+                database:dbname
+            });
+            console.log(`new exit:`);
+            console.log(exitTransaction);
+            let sqlStatement = `UPDATE gowning_db.transactions SET exittimestamp = ${exitTransaction.exittimestamp}, gown=${exitTransaction.gown}, glove=${exitTransaction.glove} WHERE id = ${exitTransaction.id};`;
+            connection.query(sqlStatement, function(err, results, fields) {
+                if (err) {
+                    console.log(err);
+                    connection.end();
+                    reject(err);
+                } else {
+                    connection.end();
+                    resolve(results);
+                };
+            })
+        }) 
+    },
+
+
     getAllKnownUsers: function() {
         return new Promise(function(resolve, reject){
             let connection = mysql.createConnection({
